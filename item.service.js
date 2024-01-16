@@ -40,4 +40,16 @@ const updateItem = (id, data) => {
     }
 }
 
-module.exports = { getAllItems, getItemById, deleteItem, updateItem }
+const getCategoryItems = (category) => {
+    validCategories = [
+        "fruits",
+        "vegetables",
+        "dairy",
+        "alcohol"]
+    let categoryItems = items.filter(item => item.category === category && validCategories.some(validCategory => validCategory === category))
+
+    if (categoryItems.length === 0) throw "Invalid category"
+    return categoryItems
+}
+
+module.exports = { getAllItems, getItemById, deleteItem, updateItem, getCategoryItems }

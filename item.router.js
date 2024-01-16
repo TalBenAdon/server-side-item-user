@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllItems, getItemById, deleteItem, updateItem } = require('./item.service')
+const { getAllItems, getItemById, deleteItem, updateItem, getCategoryItems } = require('./item.service')
 
 const router = express.Router()
 
@@ -12,6 +12,17 @@ router.get('/:id', (req, res) => {
     let item = getItemById(req.params.id)
     if (!item) res.status(400).send('item not found')
     res.send(item)
+})
+
+router.get('/categories/:category', (req, res) => {
+    try {
+        let items = getCategoryItems(req.params.category)
+
+        res.send(items)
+    } catch (error) {
+
+        res.status(400).send('items not found')
+    }
 })
 
 router.delete('/:id', (req, res) => {
