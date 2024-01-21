@@ -1,4 +1,19 @@
 const { items } = require('./item.data')
+const itemController = require('./item.controller')
+
+async function itemFilterByData(data) {
+    const readItem = await itemController.read(data)
+    return console.log(readItem);
+}
+
+itemFilterByData({ $expr: { $gt: [{ $strLenCP: '$name' }, 5] } })
+
+
+// async function getItemByPrice(body){
+//     {minPrice:'' ,maxPrice:''}
+//     let item = await itemController.read({price: {$lt:body.maxPrice,$gt:body.minPrice}})
+// }
+
 
 const getAllItems = () => {
     let notEmptyItems = items.filter(item => Boolean(item))
